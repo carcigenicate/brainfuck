@@ -138,7 +138,8 @@
        (inc-instruction-pointer))))
 
 (defn run-commands [state commands debug-mode?]
-  (let [debug-print #(do (when debug-mode? (println (str %)))
+  (let [; Prints when debug mode is active, returning the original state
+        debug-print #(do (when debug-mode? (println (str %)))
                          %)]
     (loop [{ip :instruction-pointer :as s} state]
 
