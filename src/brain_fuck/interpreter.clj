@@ -26,23 +26,11 @@
        (filter some?)
        (vec)))
 
-(defn run-commands [state commands debug-mode?]
-  (let [debug-print #(do (when debug-mode? (println (str %)))
-                         %)]
-    (loop [{ip :instruction-pointer :as s} state]
-
-      (if-let [command (get commands ip nil)]
-          (recur
-            (debug-print
-              (s/run-command s command)))
-
-          (debug-print s)))))
-
 (defn interpret
   "Interprets a string of Brain-Fuck code.
   Any invalid command characters are ignored."
   ([^String code debug-mode?]
-   (run-commands (if debug-mode? debug-state interpreter-state)
+   (s/run-commands (if debug-mode? debug-state interpreter-state)
                  (code-to-commands code)
                  debug-mode?))
 
@@ -67,7 +55,7 @@
           "reset" (recur initial-state)
 
           (let [commands (code-to-commands input)
-                new-state (run-commands state commands false)]
+                new-state (s/run-commands state commands false)]
             (println "\n" (str new-state) "\n")
             (recur (assoc new-state :instruction-pointer 0))))))))
 

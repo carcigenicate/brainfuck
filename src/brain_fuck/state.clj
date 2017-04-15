@@ -137,12 +137,14 @@
        (command)
        (inc-instruction-pointer))))
 
-(defn run-commands*
-  "Increments the instructor pointer between commands
-  Expects each command will be a function accepting only the state."
-  [state commands]
-  (reduce run-command state commands))
+(defn run-commands [state commands debug-mode?]
+  (let [debug-print #(do (when debug-mode? (println (str %)))
+                         %)]
+    (loop [{ip :instruction-pointer :as s} state]
 
-(defmacro run-commands [state & commands]
-  `(run-commands* ~state
-                  (list ~@commands)))
+      (if-let [command (get commands ip nil)]
+        (recur
+          (debug-print
+            (run-command s command)))
+
+        (debug-print s)))))
