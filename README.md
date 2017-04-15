@@ -10,27 +10,6 @@ Download from http://example.com/FIXME.
 
 FIXME: explanation
 
-    $ java -jar brain-fuck-0.1.0-standalone.jar [args]
+    REPL mode: $ java -jar brain-fuck-0.1.0-standalone.jar r
+    File read mode:  java -jar brain-fuck-0.1.0-standalone.jar i <path> <debug-mode?>
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2017 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
